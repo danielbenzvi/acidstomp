@@ -1,0 +1,10 @@
+C:\Users\Daniel\Documents\Visual Studio 2008\Projects\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
+C:\Users\Daniel\Documents\Visual Studio 2008\Projects\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
+C:\Users\Daniel\Documents\Visual Studio 2008\Projects\ConsoleApplication1\ConsoleApplication1\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Daniel\Documents\Visual Studio 2008\Projects\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
+C:\Users\Daniel\Documents\Visual Studio 2008\Projects\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
+C:\Users\Daniel\Documents\Visual Studio 2008\Projects\ConsoleApplication1\DanielStomp\obj\Debug\ConsoleApplication1.exe
+C:\Users\Daniel\Documents\Visual Studio 2008\Projects\ConsoleApplication1\DanielStomp\obj\Debug\ConsoleApplication1.pdb
+C:\Users\Daniel\Documents\Visual Studio 2008\Projects\ConsoleApplication1\DanielStomp\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Daniel\Documents\Visual Studio 2008\Projects\ConsoleApplication1\DanielStomp\bin\Debug\ConsoleApplication1.exe
+C:\Users\Daniel\Documents\Visual Studio 2008\Projects\ConsoleApplication1\DanielStomp\bin\Debug\ConsoleApplication1.pdb

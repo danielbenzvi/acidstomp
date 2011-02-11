@@ -1,0 +1,5 @@
+﻿AcidStomp - Ultrafast and lightweight stomp broker written by Daniel Ben-Zvi [daniel.benzvi@gmail.com] 2011
+
+This stomp broker supports only subscribing/unsubscribing and publishing methods of stomp.
+It is designed to be super-fast containing minimal locks and is completely asynchronous.
+
