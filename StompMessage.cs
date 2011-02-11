@@ -31,11 +31,9 @@ namespace AcidStomp
         string _body;
         byte[] _internalBuffer;
         
-        public StompMessage(byte[] packet)
+        public StompMessage(byte[] packet, int offset, int length)
         {
-            _internalBuffer = packet;
-
-            StringReader reader = new StringReader(Encoding.UTF8.GetString(packet));
+            StringReader reader = new StringReader(Encoding.UTF8.GetString(packet, offset, length));
 
             _command = reader.ReadLine();
 

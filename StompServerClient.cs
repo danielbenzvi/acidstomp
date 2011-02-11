@@ -255,15 +255,11 @@ namespace AcidStomp
                     {
                         if (_buffer.Buffer[i] == '\0') // match
                         {
-                            byte[] packet = new byte[i - localCursor];
-
-                            Array.Copy(_buffer.Buffer, localCursor, packet, 0, i - localCursor);
-
                             StompMessage message = null;
 
                             try
                             {
-                                message = new StompMessage(packet);
+                                message = new StompMessage(_buffer.Buffer, localCursor, i - localCursor);
 
                                 if (OnMessageReceived != null)
                                 {
