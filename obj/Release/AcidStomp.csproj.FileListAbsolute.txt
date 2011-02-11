@@ -1,0 +1,6 @@
+C:\Users\Daniel\Documents\Visual Studio 2008\Projects\ConsoleApplication1\acidstomp\bin\Release\AcidStomp.exe.config
+C:\Users\Daniel\Documents\Visual Studio 2008\Projects\ConsoleApplication1\acidstomp\bin\Release\AcidStomp.exe
+C:\Users\Daniel\Documents\Visual Studio 2008\Projects\ConsoleApplication1\acidstomp\bin\Release\AcidStomp.pdb
+C:\Users\Daniel\Documents\Visual Studio 2008\Projects\ConsoleApplication1\acidstomp\obj\Release\ResolveAssemblyReference.cache
+C:\Users\Daniel\Documents\Visual Studio 2008\Projects\ConsoleApplication1\acidstomp\obj\Release\AcidStomp.exe
+C:\Users\Daniel\Documents\Visual Studio 2008\Projects\ConsoleApplication1\acidstomp\obj\Release\AcidStomp.pdb
