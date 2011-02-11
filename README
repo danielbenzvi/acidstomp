@@ -9,7 +9,7 @@ AcidStomp supports Windows and Mono natively.
 Complexity of operations:
 --------------------------------
 SUBSCRIBE:		O(1)
-UNSUBSCRIBE:	O(1)
+UNSUBSCRIBE:		O(1)
 SEND:			O(subscribers)
 --------------------------------
 
