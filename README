@@ -3,3 +3,5 @@
 This stomp broker supports only subscribing/unsubscribing and publishing methods of stomp.
 It is designed to be super-fast containing minimal locks and is completely asynchronous.
 
+
+Credits to Idan Harel [idan@idan.be] for great coding and moral skillz. :-)

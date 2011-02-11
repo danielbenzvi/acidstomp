@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Reflection;
+using System.Configuration;
 
 namespace AcidStomp
 {
     class Program
     {
         static void Main(string[] args)
-        {
+        {            
             StompLogger.LogInfo("AcidStomp " + Assembly.GetExecutingAssembly().GetName().Version.ToString() + " - Starting in port " + StompConfiguration.ListenPort);
 
             StompServer server = new StompServer(StompConfiguration.ListenPort);
