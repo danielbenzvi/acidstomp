@@ -30,7 +30,7 @@ namespace AcidStomp
                 {
                     try
                     {
-                        if ((DateTime.Now - lastStatistics).TotalSeconds >= 10)
+                        if (StompConfiguration.LogStatisticsInterval > 0 && (DateTime.Now - lastStatistics).TotalSeconds >= StompConfiguration.LogStatisticsInterval)
                         {
                             StompLogger.LogInfo(
                                 String.Format("(uptime {0}, connected clients: {1}, messages [in: {2}/sec - out: {3}/sec])",

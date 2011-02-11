@@ -168,6 +168,14 @@ namespace AcidStomp
                 return GetValueOrDefault<int>("MAXIMUM_CLIENT_BUFFER_SIZE", 16384);
             }
         }
+
+        public static int LogStatisticsInterval
+        {
+            get
+            {
+                return GetValueOrDefault<int>("LOG_STATISTICS_INTERVAL", 10);
+            }
+        }
     }
 
 }
