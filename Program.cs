@@ -13,19 +13,35 @@ namespace AcidStomp
         static void Main(string[] args)
         {            
             StompLogger.LogInfo("AcidStomp " + Assembly.GetExecutingAssembly().GetName().Version.ToString() + " - Starting in port " + StompConfiguration.ListenPort);
-
-            StompServer server = new StompServer(StompConfiguration.ListenPort);
+                       
 
             try
             {
+                StompServer server = new StompServer(StompConfiguration.ListenPort);
+
+                StompStatistics.Start();
+
                 server.Start();
 
                 DateTime lastLogFlush = DateTime.Now;
+                DateTime lastStatistics = DateTime.Now;
 
                 while (server.IsRunning)
                 {
                     try
                     {
+                        if ((DateTime.Now - lastStatistics).TotalSeconds >= 10)
+                        {
+                            StompLogger.LogInfo(
+                                String.Format("(uptime {0}, connected clients: {1}, messages [in: {2}/sec - out: {3}/sec])",
+                                StompStatistics.Uptime.ToString(),
+                                StompStatistics.ConnectedClients,
+                                StompStatistics.IncomingMessagesPerSecond,
+                                StompStatistics.OutgoingMessagesPerSecond));
+
+                            lastStatistics = DateTime.Now;
+                        }
+
                         if (StompConfiguration.LogFile != null)
                         {
                             if ((DateTime.Now - lastLogFlush).TotalSeconds >= StompConfiguration.LogFileFlushInterval)
@@ -39,6 +55,7 @@ namespace AcidStomp
                     {
                         StompLogger.LogException("Failed to flush log file", ex);
                     }
+
 
 
                     Thread.Sleep(1000);

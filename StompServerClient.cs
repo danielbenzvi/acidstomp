@@ -204,7 +204,7 @@ namespace AcidStomp
 
         public void Send(byte[] buffer, int startIndex, int length)
         {
-
+            StompStatistics.CountOutgoingMessage();
             lock (_outgoingBuffers)
             {
                 _outgoingBuffers.Add(new ArraySegment<byte>(buffer, startIndex, length));                
@@ -260,6 +260,7 @@ namespace AcidStomp
                             try
                             {
                                 message = new StompMessage(_buffer.Buffer, localCursor, i - localCursor);
+                                StompStatistics.CountIncomingMessage();
 
                                 if (OnMessageReceived != null)
                                 {

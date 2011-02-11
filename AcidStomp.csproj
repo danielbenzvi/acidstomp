@@ -55,6 +55,7 @@
     <Compile Include="StompPath.cs" />
     <Compile Include="StompServer.cs" />
     <Compile Include="StompServerClient.cs" />
+    <Compile Include="StompStatistics.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -42,6 +42,7 @@ namespace AcidStomp
 
             InitEvents();
             InitActionMap();
+            
         }
 
         public Boolean IsRunning
@@ -85,7 +86,9 @@ namespace AcidStomp
             {
                 StompLogger.LogDebug(client.ToString() + " quitted");
                 _clients.Remove(client);
-            }          
+            }
+
+            StompStatistics.RemoveConnectedClient();            
         }
 
         void InitEvents()
@@ -108,6 +111,8 @@ namespace AcidStomp
             }
 
             InitClientsEvents(client);
+
+            StompStatistics.AddConnectedClient();
 
             client.Start();
 
@@ -134,7 +139,7 @@ namespace AcidStomp
 
             StompMessage result = new StompMessage("CONNECTED");
             result["session-id"] = client.SessionId.ToString();
-
+            
             client.Send(result);
         }
 
