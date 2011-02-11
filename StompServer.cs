@@ -64,9 +64,9 @@ namespace AcidStomp
             {
                 try
                 {
-                    _actionMap[message.Command].DynamicInvoke(client, message);
-
                     StompLogger.LogDebug(client.ToString() + " sent a command " + message.Command);
+
+                    _actionMap[message.Command].DynamicInvoke(client, message);                    
                 }
                 catch (Exception ex)
                 {

@@ -93,7 +93,7 @@ namespace AcidStomp
                     return _buffer;
                 }
             }
-        }
+        }        
 
         MyBuffer _buffer;
         Socket _socket;
@@ -167,17 +167,31 @@ namespace AcidStomp
         }
 
         void Flush()
-        {            
+        {
+            
             if (!_isSendOperationRunning)
             {
+                
                 lock (_outgoingBuffers)
                 {
                     if (_outgoingBuffers.Count > 0)
                     {
+                        
                         try
                         {
-                            _socket.BeginSend(_outgoingBuffers, SocketFlags.None, new AsyncCallback(OnClientSend), null);
-                            _outgoingBuffers = new List<ArraySegment<byte>>();
+                            /* Mono has a little problem with sending a list of ArraySegments. 
+                             * This is a little workaround -danielb */
+
+                            if (AppCompatibility.IsMono)
+                            {
+                                _socket.BeginSend(_outgoingBuffers[0].Array, _outgoingBuffers[0].Offset, _outgoingBuffers[0].Count, SocketFlags.None, new AsyncCallback(OnClientSend), _socket);
+                                _outgoingBuffers.RemoveAt(0);
+                            }
+                            else
+                            {
+                                _socket.BeginSend(_outgoingBuffers, SocketFlags.None, new AsyncCallback(OnClientSend), _socket);
+                                _outgoingBuffers = new List<ArraySegment<byte>>();
+                            }                        
                         }
                         catch (Exception)
                         {
@@ -185,14 +199,15 @@ namespace AcidStomp
                         }
                     }
                 }
-            }
+            }                            
         }
 
         public void Send(byte[] buffer, int startIndex, int length)
         {
+
             lock (_outgoingBuffers)
             {
-                _outgoingBuffers.Add(new ArraySegment<byte>(buffer, startIndex, length));
+                _outgoingBuffers.Add(new ArraySegment<byte>(buffer, startIndex, length));                
                 Flush();
             }
         }
@@ -200,9 +215,8 @@ namespace AcidStomp
         private void OnClientSend(IAsyncResult ar)
         {
             try
-            {
-                int sent = _socket.EndSend(ar);
-                
+            {                
+                int sent = _socket.EndSend(ar);                
 
                 if (sent == 0)
                 {

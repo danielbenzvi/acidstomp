@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppCompatibility.cs" />
     <Compile Include="StompConfiguration.cs" />
     <Compile Include="StompLogger.cs" />
     <Compile Include="StompMessage.cs" />
