@@ -11,8 +11,9 @@ namespace AcidStomp
     class Program
     {
         static void Main(string[] args)
-        {            
-            StompLogger.LogInfo("AcidStomp " + Assembly.GetExecutingAssembly().GetName().Version.ToString() + " - Starting in port " + StompConfiguration.ListenPort);
+        {
+            if (StompLogger.CanLogInfo)
+                StompLogger.LogInfo("AcidStomp " + Assembly.GetExecutingAssembly().GetName().Version.ToString() + " - Starting in port " + StompConfiguration.ListenPort);
                        
 
             try
@@ -53,7 +54,8 @@ namespace AcidStomp
                     }
                     catch (Exception ex)
                     {
-                        StompLogger.LogException("Failed to flush log file", ex);
+                        if (StompLogger.CanLogException)
+                            StompLogger.LogException("Failed to flush log file", ex);
                     }
 
 
@@ -63,7 +65,8 @@ namespace AcidStomp
             }
             catch (Exception ex)
             {
-                StompLogger.LogException("Error initializing listen server ", ex);
+                if (StompLogger.CanLogException)
+                    StompLogger.LogException("Error initializing listen server ", ex);
             }
         }
     }

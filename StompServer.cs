@@ -65,18 +65,21 @@ namespace AcidStomp
             {
                 try
                 {
-                    StompLogger.LogDebug(client.ToString() + " sent a command " + message.Command);
+                    if (StompLogger.CanLogDebug)
+                        StompLogger.LogDebug(client.ToString() + " sent a command " + message.Command);
 
                     _actionMap[message.Command].DynamicInvoke(client, message);                    
                 }
                 catch (Exception ex)
                 {
-                    StompLogger.LogException(client.ToString() + " sent a command " + message.Command + " which caused an exception", ex);
+                    if (StompLogger.CanLogException)
+                        StompLogger.LogException(client.ToString() + " sent a command " + message.Command + " which caused an exception", ex);
                 }
             }
             else
             {
-                StompLogger.LogWarning(client.ToString() + " sent an unhandled command " + message.Command);
+                if (StompLogger.CanLogWarning)
+                    StompLogger.LogWarning(client.ToString() + " sent an unhandled command " + message.Command);
             }
         }
 
@@ -84,7 +87,8 @@ namespace AcidStomp
         {
             lock (this)
             {
-                StompLogger.LogDebug(client.ToString() + " quitted");
+                if (StompLogger.CanLogDebug)
+                    StompLogger.LogDebug(client.ToString() + " quitted");
                 _clients.Remove(client);
             }
 
@@ -102,7 +106,8 @@ namespace AcidStomp
             {
                 if (_clients.Count + 1 > StompConfiguration.MaxClients)
                 {
-                    StompLogger.LogWarning("Maximum clients ("+StompConfiguration.MaxClients+") reached. Disconnecting " + client.ToString());
+                    if (StompLogger.CanLogWarning)
+                        StompLogger.LogWarning("Maximum clients ("+StompConfiguration.MaxClients+") reached. Disconnecting " + client.ToString());
                     client.Stop();
                     return;
                 }
@@ -116,7 +121,8 @@ namespace AcidStomp
 
             client.Start();
 
-            StompLogger.LogDebug(client.ToString() + " connected");
+            if (StompLogger.CanLogDebug)
+                StompLogger.LogDebug(client.ToString() + " connected");
         }
 
 
@@ -135,7 +141,8 @@ namespace AcidStomp
 
         private void OnStompCommand_Connect(StompServerClient client, StompMessage message)
         {
-            StompLogger.LogDebug(client.ToString() + " connected with session-id " + client.SessionId.ToString());
+            if (StompLogger.CanLogDebug)
+                StompLogger.LogDebug(client.ToString() + " connected with session-id " + client.SessionId.ToString());
 
             StompMessage result = new StompMessage("CONNECTED");
             result["session-id"] = client.SessionId.ToString();
@@ -147,8 +154,9 @@ namespace AcidStomp
         {
             StompPath path = null;
             String destination = message["destination"];
-
-            StompLogger.LogDebug(client.ToString() + " subscribes to " + destination);
+            
+            if (StompLogger.CanLogDebug)
+                StompLogger.LogDebug(client.ToString() + " subscribes to " + destination);
             
             lock (this)
             {
@@ -173,7 +181,8 @@ namespace AcidStomp
                     _paths.Remove(path.Name);
             }
 
-            StompLogger.LogDebug("Path " + path.Name + " destroyed");
+            if (StompLogger.CanLogDebug)
+                StompLogger.LogDebug("Path " + path.Name + " destroyed");
 
         }
 
@@ -181,8 +190,9 @@ namespace AcidStomp
         {
             StompPath path = null;
             String destination = message["destination"];
-
-            StompLogger.LogDebug(client.ToString() + " unsubscribes from " + destination);
+            
+            if (StompLogger.CanLogDebug)
+                StompLogger.LogDebug(client.ToString() + " unsubscribes from " + destination);
 
             lock (this)
             {
@@ -199,7 +209,8 @@ namespace AcidStomp
             StompPath path = null;
             String destination = message["destination"];
 
-            StompLogger.LogDebug(client.ToString() + " sent data to " + destination);
+            if (StompLogger.CanLogDebug)
+                StompLogger.LogDebug(client.ToString() + " sent data to " + destination);
 
             lock (this)
             {
@@ -218,12 +229,14 @@ namespace AcidStomp
                 {
                     try
                     {
-                        StompLogger.LogDebug("Sending " + message.Command + " to " + pathClient.ToString());
+                        if (StompLogger.CanLogDebug)
+                            StompLogger.LogDebug("Sending " + message.Command + " to " + pathClient.ToString());
                         pathClient.Send(message);
                     }
                     catch (Exception ex)
                     {
-                        StompLogger.LogException(pathClient.ToString() + " has thrown an exception while sending data", ex);
+                        if (StompLogger.CanLogException)
+                            StompLogger.LogException(pathClient.ToString() + " has thrown an exception while sending data", ex);
                     }
                 }
             }

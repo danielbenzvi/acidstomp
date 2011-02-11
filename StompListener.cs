@@ -59,7 +59,8 @@ namespace AcidStomp
             }
             catch (Exception ex)
             {
-                StompLogger.LogException("Listener failed to initialize the client", ex);
+                if (StompLogger.CanLogException)
+                    StompLogger.LogException("Listener failed to initialize the client", ex);
             }
 
             try
@@ -68,7 +69,8 @@ namespace AcidStomp
             }
             catch (Exception ex)
             {
-                StompLogger.LogException("Failed to begin accept", ex);
+                if (StompLogger.CanLogException)
+                    StompLogger.LogException("Failed to begin accept", ex);
                 _isListening = false;
             }
         }

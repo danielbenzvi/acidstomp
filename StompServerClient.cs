@@ -50,8 +50,13 @@ namespace AcidStomp
             {
                 if (_buffer.Length - length > 0)
                 {
-                    byte[] newArray = new byte[_buffer.Length - length];
-                    Array.Copy(_buffer, length, newArray, 0, _buffer.Length - length);
+                    int newSize = _buffer.Length - length;
+                    
+                    if (newSize < StompConfiguration.MinClientBufferSize && StompConfiguration.MinClientBufferSize < Size-length)
+                        newSize = StompConfiguration.MinClientBufferSize;
+
+                    byte[] newArray = new byte[newSize];
+                    Array.Copy(_buffer, length, newArray, 0, newSize);
 
                     _buffer = newArray;
 
@@ -273,7 +278,8 @@ namespace AcidStomp
                             }
                             catch (Exception ex)
                             {
-                                StompLogger.LogException("Failed to parse stomp packet", ex);
+                                if (StompLogger.CanLogException)
+                                    StompLogger.LogException("Failed to parse stomp packet", ex);
                             }
 
 

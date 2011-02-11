@@ -72,6 +72,39 @@ namespace AcidStomp
             Console.Out.WriteLine(buf);
         }
 
+        public static bool CanLogWarning
+        {
+            get
+            {
+                return StompConfiguration.LogLevel >= 1;
+            }
+        }
+
+        public static bool CanLogInfo
+        {
+            get
+            {
+                return StompConfiguration.LogLevel >= 0;
+            }
+        }
+
+        public static bool CanLogException
+        {
+            get
+            {
+                return StompConfiguration.LogLevel >= 0;
+            }
+        }
+
+
+        public static bool CanLogDebug
+        {
+            get
+            {
+                return StompConfiguration.LogLevel >= 2;
+            }
+        }
+
         public static void LogWarning(string message)
         {
             if (StompConfiguration.LogLevel >= 1)

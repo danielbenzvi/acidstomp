@@ -58,7 +58,7 @@
     <Compile Include="StompStatistics.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="AcidStomp.exe.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README" />
