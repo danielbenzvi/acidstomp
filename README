@@ -2,15 +2,3 @@
 
 This stomp broker supports only subscribing/unsubscribing and publishing methods of stomp.
 It is designed to be super-fast containing minimal locks and is completely asynchronous.
-
-AcidStomp supports Windows and Mono natively.
-
-
-Complexity of operations:
---------------------------------
-SUBSCRIBE:		O(1)
-UNSUBSCRIBE:		O(1)
-SEND:			O(subscribers)
---------------------------------
-
-
